@@ -6,6 +6,7 @@ import { MailModule } from './mail/mail.module';
 import { SpecialityModule } from './speciality/speciality.module';
 import { WorkerModule } from './worker/worker.module';
 import { BlockModule } from './block/block.module';
+import { WorkerBlockModule } from './worker_block/worker_block.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { BlockModule } from './block/block.module';
     SpecialityModule,
     WorkerModule,
     BlockModule,
+    WorkerBlockModule,
   ],
   controllers: [],
   providers: [],

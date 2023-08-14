@@ -26,10 +26,15 @@ export class WorkerService {
     return spec;
   }
 
-  findAll() {
-    return this.workerModel.find();
-  }
+  async findAll(): Promise<Worker[]> {
+    const workers = await this.workerModel
+      .find()
+      .populate('speciality_id')
+      .populate('blocks')
+      .exec();
 
+    return workers;
+  }
   findOne(id: string) {
     return this.workerModel.findById(id);
   }

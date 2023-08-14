@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { CreateWorkerDto } from './dto/create-worker.dto';
 import { UpdateWorkerDto } from './dto/update-worker.dto';
 import { WorkerService } from './worker.service';
@@ -14,12 +22,14 @@ export class WorkerController {
 
   @Get()
   findAll() {
-    return this.workerService.findAll().populate("speciality_id");
+    return this.workerService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.workerService.findOne(id).populate("speciality_id");
+    return this.workerService
+      .findOne(id)
+      
   }
 
   // @Patch(':id')
@@ -32,4 +42,3 @@ export class WorkerController {
   //   return this.workerService.remove(id);
   // }
 }
-

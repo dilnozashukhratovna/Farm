@@ -1,26 +1,39 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateBlockDto } from './dto/create-block.dto';
 import { UpdateBlockDto } from './dto/update-block.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Block } from './schemas/block.schema';
 
 @Injectable()
 export class BlockService {
-  create(createBlockDto: CreateBlockDto) {
-    return 'This action adds a new block';
+  constructor(@InjectModel(Block.name) private blockModel: Model<Block>) {}
+
+  async create(createBlockDto: CreateBlockDto) {
+    return this.blockModel.create(createBlockDto);
   }
 
-  findAll() {
-    return `This action returns all block`;
+  async findAll() {
+    return this.blockModel.find().populate('workers');
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} block`;
+  async findOne(id: string) {
+    return this.blockModel.findById(id);
   }
 
-  update(id: number, updateBlockDto: UpdateBlockDto) {
-    return `This action updates a #${id} block`;
+  async update(id: string, updateBlockDto: UpdateBlockDto) {
+    const existingBlock = await this.blockModel
+      .findByIdAndUpdate(id, updateBlockDto, { new: true })
+      .exec();
+
+    if (!existingBlock) {
+      throw new NotFoundException('Block not found');
+    }
+
+    return existingBlock;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} block`;
+  remove(id: string) {
+    return this.blockModel.findByIdAndDelete(id);
   }
 }

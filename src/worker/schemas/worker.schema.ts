@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
 import { Speciality } from '../../speciality/schemas/speciality.schema';
+import { Block } from '../../block/schemas/block.schema';
 
 export type WorkerDocument = HydratedDocument<Worker>;
 
@@ -26,6 +27,9 @@ export class Worker {
 
   @Prop({ required: true })
   worker_schedule: Date;
+
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Block' }] })
+  blocks: Block[];
 }
 
 export const WorkerSchema = SchemaFactory.createForClass(Worker);
