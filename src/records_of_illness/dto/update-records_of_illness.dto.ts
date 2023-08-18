@@ -1,0 +1,14 @@
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateRecordsOfIllnessDto } from './create-records_of_illness.dto';
+
+export class UpdateRecordsOfIllnessDto extends PartialType(
+  CreateRecordsOfIllnessDto,
+) {
+  animal_id?: number;
+  ilness_type?: string;
+  date_disease?: Date;
+  medicines?: Date;
+  treatment_day_count?: number;
+  illness_photo?: string;
+  worker_id?: number;
+}
