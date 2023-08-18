@@ -33,7 +33,7 @@ export class WorkerBlockService {
       .exec();
 
     if (!existingValue) {
-      throw new NotFoundException('Speciality not found');
+      throw new NotFoundException('Worker block not found');
     }
 
     return existingValue;

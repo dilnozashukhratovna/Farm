@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateWorkerDto } from './dto/create-worker.dto';
 import { UpdateWorkerDto } from './dto/update-worker.dto';
 import { InjectModel } from '@nestjs/mongoose';
@@ -39,11 +43,19 @@ export class WorkerService {
     return this.workerModel.findById(id);
   }
 
-  update(id: string, updateWorkerDto: UpdateWorkerDto) {
-    return `This action updates a #${id} worker`;
+  async update(id: string, updateWorkerDto: UpdateWorkerDto) {
+    const existingValue = await this.workerModel
+      .findByIdAndUpdate(id, updateWorkerDto, { new: true })
+      .exec();
+
+    if (!existingValue) {
+      throw new NotFoundException('Worker not found');
+    }
+
+    return existingValue;
   }
 
   remove(id: string) {
-    return `This action removes a #${id} worker`;
+    return this.workerModel.deleteOne({ id });
   }
 }
