@@ -6,11 +6,15 @@ import {
   RecordsOfIllness,
   RecordsOfIllnessSchema,
 } from './schemas/records_of_illness.schema';
+import { Animal, AnimalSchema } from '../animals/schemas/animal.schema';
+import { Worker, WorkerSchema } from '../worker/schemas/worker.schema';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: RecordsOfIllness.name, schema: RecordsOfIllnessSchema },
+      { name: Animal.name, schema: AnimalSchema },
+      { name: Worker.name, schema: WorkerSchema },
     ]),
   ],
   controllers: [RecordsOfIllnessController],

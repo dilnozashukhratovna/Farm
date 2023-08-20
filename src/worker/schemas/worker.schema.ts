@@ -12,7 +12,7 @@ export class Worker {
 
   @Prop({ required: true })
   age: number;
-
+z
   @Prop({ required: true })
   experience: number;
 
