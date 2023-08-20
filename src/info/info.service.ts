@@ -14,7 +14,7 @@ export class InfoService {
   }
 
   async findAll() {
-    return this.infoModel.find().populate('workers');
+    return this.infoModel.find()
   }
 
   async findOne(id: string) {

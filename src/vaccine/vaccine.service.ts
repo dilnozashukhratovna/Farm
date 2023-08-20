@@ -14,7 +14,7 @@ export class VaccineService {
   }
 
   async findAll() {
-    return this.vaccineModel.find().populate('workers');
+    return this.vaccineModel.find()
   }
 
   async findOne(id: string) {

@@ -14,7 +14,7 @@ export class FeedingService {
   }
 
   async findAll() {
-    return this.feedingModel.find().populate('workers');
+    return this.feedingModel.find()
   }
 
   async findOne(id: string) {

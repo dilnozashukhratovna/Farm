@@ -17,7 +17,10 @@ export class RecordsOfIllnessService {
   }
 
   async findAll() {
-    return this.records_of_illnessModel.find().populate('workers');
+    return this.records_of_illnessModel
+      .find()
+      .populate('animal_id')
+      .populate('worker_id');
   }
 
   async findOne(id: string) {

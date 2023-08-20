@@ -14,7 +14,7 @@ export class MilkProductionService {
   }
 
   async findAll() {
-    return this.milk_productionModel.find().populate('workers');
+    return this.milk_productionModel.find()
   }
 
   async findOne(id: string) {

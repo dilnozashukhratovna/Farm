@@ -14,7 +14,7 @@ export class Vaccination_historyService {
   }
 
   async findAll() {
-    return this.vaccination_historyModel.find().populate('workers');
+    return this.vaccination_historyModel.find()
   }
 
   async findOne(id: string) {
