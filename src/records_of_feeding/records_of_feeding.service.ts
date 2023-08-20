@@ -25,7 +25,7 @@ export class RecordsOfFeedingService {
   }
 
   async findAll() {
-    return this.recordsOfFeedingModel.find();
+    return this.recordsOfFeedingModel.find().populate('feeding_id');
   }
 
   async findOne(id: string) {

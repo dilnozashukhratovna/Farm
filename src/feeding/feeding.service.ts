@@ -7,14 +7,16 @@ import { Feeding } from './schemas/feeding.schema';
 
 @Injectable()
 export class FeedingService {
-  constructor(@InjectModel(Feeding.name) private feedingModel: Model<Feeding>) {}
+  constructor(
+    @InjectModel(Feeding.name) private feedingModel: Model<Feeding>,
+  ) {}
 
   async create(createFeedingDto: CreateFeedingDto) {
     return this.feedingModel.create(createFeedingDto);
   }
 
   async findAll() {
-    return this.feedingModel.find()
+    return this.feedingModel.find().populate('animal_id').populate('worker_id');
   }
 
   async findOne(id: string) {

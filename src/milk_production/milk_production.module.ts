@@ -6,11 +6,13 @@ import {
   MilkProduction,
   MilkProductionSchema,
 } from './schemas/milk_production.schema';
+import { Animal, AnimalSchema } from '../animals/schemas/animal.schema';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: MilkProduction.name, schema: MilkProductionSchema },
+      { name: Animal.name, schema: AnimalSchema },
     ]),
   ],
   controllers: [MilkProductionController],

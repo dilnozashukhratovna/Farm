@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
+import { Animal } from '../../animals/schemas/animal.schema';
 
 export type MeatProductionDocument = HydratedDocument<MeatProduction>;
 
@@ -11,8 +12,8 @@ export class MeatProduction {
   slaughter_date: Date;
   @Prop()
   shearing_schedule: Date;
-  @Prop()
-  animal_id: number;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Animal' })
+  animal_id: Animal;
 }
 
 export const MeatProductionSchema =

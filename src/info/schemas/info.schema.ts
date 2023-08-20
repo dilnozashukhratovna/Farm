@@ -1,5 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
+import { Block } from '../../block/schemas/block.schema';
+import { Animal } from '../../animals/schemas/animal.schema';
 
 export type InfoDocument = HydratedDocument<Info>;
 
@@ -17,10 +19,10 @@ export class Info {
   gender: string;
   @Prop()
   birth_date: Date;
-  @Prop()
-  block_id: number;
-  @Prop()
-  animal_id: number;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Block' })
+  block_id: Block;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Animal' })
+  animal_id: Animal;
   @Prop()
   parent_id: number;
 }

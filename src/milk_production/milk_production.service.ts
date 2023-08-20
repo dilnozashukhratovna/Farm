@@ -7,14 +7,17 @@ import { MilkProduction } from './schemas/milk_production.schema';
 
 @Injectable()
 export class MilkProductionService {
-  constructor(@InjectModel(MilkProduction.name) private milk_productionModel: Model<MilkProduction>) {}
+  constructor(
+    @InjectModel(MilkProduction.name)
+    private milk_productionModel: Model<MilkProduction>,
+  ) {}
 
   async create(createMilkProductionDto: CreateMilkProductionDto) {
     return this.milk_productionModel.create(createMilkProductionDto);
   }
 
   async findAll() {
-    return this.milk_productionModel.find()
+    return this.milk_productionModel.find().populate('animal_id');
   }
 
   async findOne(id: string) {

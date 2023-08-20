@@ -1,6 +1,8 @@
+import mongoose from "mongoose";
+
 export class CreateFiberProductionDto {
   fiber_yield: string;
   shearing_schedule: Date;
   fiber_quality: string;
-  animal_id: number;
+  animal_id: mongoose.Schema.Types.ObjectId;;
 }

@@ -17,7 +17,7 @@ export class MeatProductionService {
   }
 
   async findAll() {
-    return this.meat_productionModel.find()
+    return this.meat_productionModel.find().populate('animal_id');
   }
 
   async findOne(id: string) {

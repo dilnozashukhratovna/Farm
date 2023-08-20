@@ -6,11 +6,13 @@ import {
   FiberProduction,
   FiberProductionSchema,
 } from './schemas/fiber_production.schema';
+import { Animal, AnimalSchema } from '../animals/schemas/animal.schema';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: FiberProduction.name, schema: FiberProductionSchema },
+      { name: Animal.name, schema: AnimalSchema },
     ]),
   ],
 

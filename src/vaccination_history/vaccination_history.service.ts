@@ -7,21 +7,31 @@ import { UpdateVaccination_historyDto } from './dto/update-vaccination_history.d
 
 @Injectable()
 export class Vaccination_historyService {
-  constructor(@InjectModel(Vaccination_history.name) private vaccination_historyModel: Model<Vaccination_history>) {}
+  constructor(
+    @InjectModel(Vaccination_history.name)
+    private vaccination_historyModel: Model<Vaccination_history>,
+  ) {}
 
   async create(createVaccination_historyDto: CreateVaccination_historyDto) {
     return this.vaccination_historyModel.create(createVaccination_historyDto);
   }
 
   async findAll() {
-    return this.vaccination_historyModel.find()
+    return this.vaccination_historyModel
+      .find()
+      .populate('animal_id')
+      .populate('vaccine_type_id')
+      .populate('worker_id');
   }
 
   async findOne(id: string) {
     return this.vaccination_historyModel.findById(id);
   }
 
-  async update(id: string, updateVaccination_historyDto: UpdateVaccination_historyDto) {
+  async update(
+    id: string,
+    updateVaccination_historyDto: UpdateVaccination_historyDto,
+  ) {
     const existingVaccination_history = await this.vaccination_historyModel
       .findByIdAndUpdate(id, updateVaccination_historyDto, { new: true })
       .exec();

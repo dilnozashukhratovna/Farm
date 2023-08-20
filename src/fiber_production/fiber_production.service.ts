@@ -17,7 +17,7 @@ export class FiberProductionService {
   }
 
   async findAll() {
-    return this.fiber_productionModel.find()
+    return this.fiber_productionModel.find().populate('animal_id');
   }
 
   async findOne(id: string) {

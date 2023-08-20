@@ -14,7 +14,7 @@ export class AnimalsService {
   }
 
   async findAll() {
-    return this.animalModel.find()
+    return this.animalModel.find().populate('animal_type_id');
   }
 
   async findOne(id: string) {

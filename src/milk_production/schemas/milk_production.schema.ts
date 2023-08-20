@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
+import { Animal } from '../../animals/schemas/animal.schema';
 
 export type MilkProductionDocument = HydratedDocument<MilkProduction>;
 
@@ -11,8 +12,8 @@ export class MilkProduction {
   milk_schedule: Date;
   @Prop()
   milk_quality: string;
-  @Prop()
-  animal_id: number;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Animal' })
+  animal_id: Animal;
 }
 
 export const MilkProductionSchema =
